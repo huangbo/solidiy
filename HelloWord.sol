@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.7;
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+
 
 // contract ValueTypes {
 //     string public myString = "hello world";
@@ -88,12 +90,14 @@ pragma solidity 0.8.7;
 //     }
 // }
 
-// 可以修饰变量和函数，函数的默认类型为public，变量的默认类型为internal（不能为external）。
-// 内部调用不会产生EVM调用也称为消息调用，外部调用会产生EVM调用
-// public 在合约外部和合约内部都可以调用
-// external 外部调用，只能在合约外部调用（如果在合约内部包括继承子合约调用，调用需要通过this，不推荐这样），需要this访问，因为只能在合约外部访问，所以子合约也不能override
-// internal 内部调用，当前合约和继承子合约可以调用
-// private  只能当前合约中访问，继承子合约无法访问
+/*
+ 可以修饰变量和函数，函数的默认类型为public，变量的默认类型为internal（不能为external）。
+ 内部调用不会产生EVM调用也称为消息调用，外部调用会产生EVM调用
+ public 在合约外部和合约内部都可以调用
+ external 外部调用，只能在合约外部调用（如果在合约内部包括继承子合约调用，调用需要通过this，不推荐这样），需要this访问，因为只能在合约外部访问，所以子合约也不能override
+ internal 内部调用，当前合约和继承子合约可以调用
+ private  只能当前合约中访问，继承子合约无法访问
+*/
 
 // contract FunctionTypes {
 //     uint256 public number = 5;
@@ -111,9 +115,11 @@ pragma solidity 0.8.7;
 //     }
 // }
 
-// pure 不能读也不能写链上的状态变量number，传入参数进行简单操作
-// view 可以读到链上的状态变量，但是不能写
-// 默认可以读写
+/*
+ pure 不能读也不能写链上的状态变量number，传入参数进行简单操作
+ view 可以读到链上的状态变量，但是不能写
+ 默认可以读写
+*/
 
 // contract PayTest {
 //     function getbalance() public view returns(uint){
@@ -128,7 +134,7 @@ pragma solidity 0.8.7;
 //     }
 //     // 给调用者转账
 //     function transferFromContract() public payable {
-//         payable(address(msg.sender)).transfer(1**10**18);
+//         payable(address(msg.sender)).transfer(10**18 wei);
 //     }
 // }
 
@@ -146,8 +152,10 @@ pragma solidity 0.8.7;
 //     }
 // }
 
-// payable 函数在被调用的时候会将value转入到合约
-// 全局变量 msg.sender msg.value msg表示调用这个函数的地址，可能是一个人也有可能是一个合约
+/*
+ payable 函数在被调用的时候会将value转入到合约
+ 全局变量 msg.sender msg.value msg表示调用这个函数的地址，可能是一个人也有可能是一个合约
+*/
 
 // contract Constants {
 //     address public constant MY_ADDRESS = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
@@ -168,8 +176,10 @@ pragma solidity 0.8.7;
 //     }
 // }
 
-// constant 更节省gas，如果状态变量声明为 constant (常量)。在这种情况下，只能使用那些在编译时有确定值的表达式来给它们赋值。
-// 使用immutable更节省gas，声明为不可变量(immutable)的变量的限制要比声明为常量(constant) 的变量的限制少：可以在合约的构造函数中或声明时为不可变的变量分配任意值。 不可变量在构造期间无法读取其值，并且只能赋值一次。
+/*
+ constant 更节省gas，如果状态变量声明为 constant (常量)。在这种情况下，只能使用那些在编译时有确定值的表达式来给它们赋值。
+ 使用immutable更节省gas，声明为不可变量(immutable)的变量的限制要比声明为常量(constant) 的变量的限制少：可以在合约的构造函数中或声明时为不可变的变量分配任意值。 不可变量在构造期间无法读取其值，并且只能赋值一次。
+*/
 
 // contract Error {
 //     error MyError(address caller, uint i);
@@ -263,22 +273,24 @@ pragma solidity 0.8.7;
 //         return b;
 //     }
 // }
-// 状态变量 – 变量值永久保存在合约存储空间中的变量。
-// 局部变量 – 变量值仅在函数执行过程中有效的变量，函数退出后，变量无效。
-// 全局变量 – 保存在全局命名空间，用于获取区块链相关信息的特殊变量。
 
-// solidity数据存储位置有三类：storage，memory和calldata。
-// memory：函数里的参数和临时变量一般用memory，存储在内存中，不上链。
-// calldata：和memory类似，存储在内存中，不上链。与memory的不同点在于calldata变量不能修改immutable。
-// storage：合约中状态变都为storage，存储在以太坊区块链中
-/* 
+/*
+ 状态变量 – 变量值永久保存在合约存储空间中的变量。
+ 局部变量 – 变量值仅在函数执行过程中有效的变量，函数退出后，变量无效。
+ 全局变量 – 保存在全局命名空间，用于获取区块链相关信息的特殊变量。
+
+ solidity数据存储位置有三类：storage，memory和calldata。
+ memory：函数里的参数和临时变量一般用memory，存储在内存中，不上链。
+ calldata：和memory类似，存储在内存中，不上链。与memory的不同点在于calldata变量不能修改 immutable。
+ storage：合约中状态变都为storage，存储在以太坊区块链中
+
+ storage给storage赋值或者memory给memory赋值，是创建引用，不同之间的两两赋值是创建副本。
+
 Explicit data location for all variables of struct, array or mapping types is now mandatory. 
 This is also applied to function parameters and return variables.
  For example, change uint[] x = m_x to uint[] storage x = m_x, and function f(uint[][] x) to function f(uint[][] memory x) where memory is the data location and might be replaced by storage or calldata accordingly.
   Note that external functions require parameters with a data location of calldata.
 */
-
-// storage给storage赋值或者memory给memory赋值，是创建引用，不同之间的两两赋值是创建副本。
 
 
 // contract Mapping {
@@ -503,8 +515,10 @@ This is also applied to function parameters and return variables.
 //     } 
 // }
 
-// fallback回退函数当调用函数在合约不存在或者向合约中发放主币的时候（回退函数是payable的时候）
-// msg.data存在的时候调用fallback，不存在调用receive，如果receive不存在，那么还是调用fallback
+/*
+ fallback回退函数当调用函数在合约不存在或者向合约中发放主币的时候（回退函数是payable的时候）
+ msg.data存在的时候调用fallback，不存在调用receive，如果receive不存在，那么还是调用fallback
+*/
 
 // contract SendEther {
 //     constructor() payable {}
@@ -530,13 +544,13 @@ This is also applied to function parameters and return variables.
 //     }
 // }
 
-contract EthReceiver {
-    event Log(uint amount , uint gas);
+// contract EthReceiver {
+//     event Log(uint amount , uint gas);
 
-    receive() external payable {
-        emit Log(msg.value, gasleft());
-    } 
-}
+//     receive() external payable {
+//         emit Log(msg.value, gasleft());
+//     } 
+// }
 // 三种发送主币的方法
 
 // contract TestContract {
@@ -584,7 +598,6 @@ contract EthReceiver {
 
 // }
 
-
 // interface ICounter {
 //     function count() external view returns (uint);
 //     function inc() external;
@@ -598,8 +611,30 @@ contract EthReceiver {
 //         return count;
 //     }
 // }
-
 // 接口合约
+// 所有函数都必须是external且不能有函数体, 继承接口的合约必须实现接口定义的所有功能
+
+// contract interactBAYC {
+//     // 利用BAYC地址创建接口合约变量（ETH主网）
+//     IERC721 BAYC = IERC721(0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D);
+
+//     // 通过接口调用BAYC的balanceOf()查询持仓量
+//     function balanceOfBAYC(address owner) external view returns (uint256 balance){
+//         return BAYC.balanceOf(owner);
+//     }
+
+//     // 通过接口调用BAYC的safeTransferFrom()安全转账
+//     function safeTransferFromBAYC(address from, address to, uint256 tokenId) external{
+//         BAYC.safeTransferFrom(from, to, tokenId);
+//     }
+// }
+
+/*
+ 无聊猿BAYC属于ERC721代币，实现了IERC721接口的功能。我们不需要知道它的源代码，只需知道它的合约地址，用IERC721接口就可以与它交互，
+ 比如用balanceOf()来查询某个地址的BAYC余额，用safeTransferFrom()来转账BAYC。
+*/
+
+
 // contract TestCall {
 //     string public message;
 //     uint public x;
@@ -660,7 +695,47 @@ contract EthReceiver {
 //     }
 // }
 
-// 委托调用，被委托调用合约的状态变量不会改变，只会使用被委托调用合约的逻辑。
+// 委托调用，被委托调用合约的状态变量不会改变，只会使用被委托调用合约的逻辑。被调用合约相当于一个工具放到调用合约中
+
+
+
+// contract TestMultiCall {
+//     function func1() external view returns(uint, uint) {
+//         return (1, block.timestamp);
+//     }
+//     function func2() external view returns(uint, uint) {
+//         return (2, block.timestamp);
+//     }
+
+//     function getData1() external pure returns (bytes memory) {
+//         return abi.encodeWithSelector(this.func1.selector);
+//     }
+//     function getData2() external pure returns (bytes memory) {
+//         return abi.encodeWithSelector(this.func2.selector);
+//     }
+// }
+
+// contract MultiCall {
+//     function multiCall(address[] calldata targets, bytes[] calldata data) external view returns(bytes[] memory) {
+//         require(targets.length == data.length, "target length != data length");
+//         bytes[] memory results = new bytes[](data.length);
+//         for (uint i = 0; i < targets.length; i++) {
+//             (bool success, bytes memory result) = targets[i].staticcall(data[i]);
+//             require(success, "call faild");
+//             results[i] = result;
+//         }
+//         return results;
+//     }
+// }
+
+/* 静态调用 call staticcall 
+rpc节点限制每个客户端调用频率，合约的调用打包成一起一次性调用
+call consumes less gas than calling the function on the contract instance. 
+So in some cases call is preferred for gas optimisation.
+Solidity has 2 more low level functions delegatecall and staticcall . staticcall is exactly the same as call with only difference that it cannot modify state of the contract being called. delegatecall is discussed below.
+*/
+
+
 
 // library ArrayLib {
 //     function find(uint[] storage _arr, uint x) internal view returns(uint) {
@@ -684,6 +759,9 @@ contract EthReceiver {
 //     }
 // }
 // 库合约的调用
+// 如果有许多合约，它们有一些共同代码，则可以把共同代码部署成一个库。这将节省gas，因为gas也依赖于合约的规模。因此，可以把库想象成使用其合约的父合约。
+// 使用父合约（而非库）切分共同代码不会节省gas，因为在Solidity中，继承通过复制代码工作。
+
 
 // contract hashF {
 //     function hash(string memory _text, string memory _otherText) external pure returns(bytes32) {
@@ -809,35 +887,3 @@ ethereum.request({method: "personal_sign", params: [account, hash]})
 // }
 
 // 荷兰拍卖
-
-// contract TestMultiCall {
-//     function func1() external view returns(uint, uint) {
-//         return (1, block.timestamp);
-//     }
-//     function func2() external view returns(uint, uint) {
-//         return (2, block.timestamp);
-//     }
-
-//     function getData1() external pure returns (bytes memory) {
-//         return abi.encodeWithSelector(this.func1.selector);
-//     }
-//     function getData2() external pure returns (bytes memory) {
-//         return abi.encodeWithSelector(this.func2.selector);
-//     }
-// }
-
-// contract MultiCall {
-//     function multiCall(address[] calldata targets, bytes[] calldata data) external view returns(bytes[] memory) {
-//         require(targets.length == data.length, "target length != data length");
-//         bytes[] memory results = new bytes[](data.length);
-//         for (uint i = 0; i < targets.length; i++) {
-//             (bool success, bytes memory result) = targets[i].staticcall(data[i]);
-//             require(success, "call faild");
-//             results[i] = result;
-//         }
-//         return results;
-//     }
-// }
-
-// 静态调用
-// rpc节点限制每个客户端调用频率，合约的调用打包成一起一次性调用

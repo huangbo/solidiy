@@ -1,0 +1,81 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "payable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "gg",
+						"type": "uint256"
+					}
+				],
+				"name": "AttackLog",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "getBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Attact.sol": "TxAttackWallet"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Attact.sol": {
+			"keccak256": "0xd87e04f65f4acfb6991f974b18ce760920bce1d0af3d6f6d85416a1b254a7652",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://009837511b6bb6f17be04822134493e5a522003fccbffd870065a909bc066589",
+				"dweb:/ipfs/QmYVX6G6Tdqn7UzUABHaBN9HReZ7fmLfNTEi33jSzfhZ3x"
+			]
+		}
+	},
+	"version": 1
+}

