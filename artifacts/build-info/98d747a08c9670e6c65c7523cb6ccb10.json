@@ -1,0 +1,83 @@
+{
+	"id": "98d747a08c9670e6c65c7523cb6ccb10",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.7",
+	"solcLongVersion": "0.8.7+commit.e28d00a7",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"GasOptimize.sol": {
+				"content": "// Solidity 合约数据存储布局\n/*\nStorage 是一个巨大的Map，一共2^256个插槽 (slot)，每个插糟有 32字节，合约中的“状态变量”会根据其具体类型分别保存到这些插槽中。\n\n*/\n\n\n\n/*\n. 状态变量中只应该保存Solidity智能合约需要使用的数据，而其他数据都应该利用智能合约的事件机制转储到外部.事件是以太坊中gas成本最低的操作之一，一次触发大约消耗4000 gas。\n. 避免使用ERC721Enumerable，并用Counter代替totalSupply()来追踪代币ID，买家可以节省高达70%的铸币手续费和高达35%的转账费。\n. 使用constant immutable \n. 合理使用calldata memory storage 存储位置\n. 在 Solidity 语言中\n  Solidity 编译器在编译合约时，将严格的根据定义顺序，依次给他们设定存储位置。所以变量的定义顺序会影响存储空间进而影响gas的使用\n  合理定义数据类型，尽量少占用空间\n. 白名单使用映射而不是数组遍历，但是如果白名单过多也会导致映射需要的空间过大，优化为Merkle树方案，合约只保存Merkle树跟用来验证是否白名单，Merkle树在后端保存处理\n. NFT token第一个从1开始，变量从0设置为非0代价比较昂贵\n. 减少代码量：修改器、库合约等实现公共逻辑\n*/\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			}
+		}
+	},
+	"output": {
+		"errors": [
+			{
+				"component": "general",
+				"errorCode": "1878",
+				"formattedMessage": "Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing \"SPDX-License-Identifier: <SPDX-License>\" to each source file. Use \"SPDX-License-Identifier: UNLICENSED\" for non-open-source code. Please see https://spdx.org for more information.\n--> GasOptimize.sol\n\n",
+				"message": "SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing \"SPDX-License-Identifier: <SPDX-License>\" to each source file. Use \"SPDX-License-Identifier: UNLICENSED\" for non-open-source code. Please see https://spdx.org for more information.",
+				"severity": "warning",
+				"sourceLocation": {
+					"end": -1,
+					"file": "GasOptimize.sol",
+					"start": -1
+				},
+				"type": "Warning"
+			},
+			{
+				"component": "general",
+				"errorCode": "3420",
+				"formattedMessage": "Warning: Source file does not specify required compiler version! Consider adding \"pragma solidity ^0.8.7;\"\n--> GasOptimize.sol\n\n",
+				"message": "Source file does not specify required compiler version! Consider adding \"pragma solidity ^0.8.7;\"",
+				"severity": "warning",
+				"sourceLocation": {
+					"end": -1,
+					"file": "GasOptimize.sol",
+					"start": -1
+				},
+				"type": "Warning"
+			}
+		],
+		"sources": {
+			"GasOptimize.sol": {
+				"ast": {
+					"absolutePath": "GasOptimize.sol",
+					"exportedSymbols": {},
+					"id": 1,
+					"nodeType": "SourceUnit",
+					"nodes": [],
+					"src": "1334:0:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

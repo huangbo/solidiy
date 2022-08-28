@@ -1,0 +1,83 @@
+{
+	"id": "c327bd1e06224899eaa190fedb5af98e",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.7",
+	"solcLongVersion": "0.8.7+commit.e28d00a7",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"GasOptimize.sol": {
+				"content": "/*\n. 状态变量中只应该保存Solidity智能合约需要使用的数据，而其他数据都应该利用智能合约的事件机制转储到外部.事件是以太坊中gas成本最低的操作之一，一次触发大约消耗4000 gas。\n. 避免使用ERC721Enumerable，并用Counter代替totalSupply()来追踪代币ID，买家可以节省高达70%的铸币手续费和高达35%的转账费。\n. 使用constant immutable \n. 合理使用calldata memory storage 存储位置\n. 在 Solidity 语言中\n  Solidity 编译器在编译合约时，将严格的根据定义顺序，依次给他们设定存储位置。所以变量的定义顺序会影响存储空间进而影响gas的使用\n  合理定义数据类型，尽量少占用空间\n. 白名单使用映射而不是数组遍历，但是如果白名单过多也会导致映射需要的空间过大，优化为Merkle树方案，合约只保存Merkle树跟用来验证是否白名单，Merkle树在后端保存处理\n. NFT token第一个从1开始，变量从0设置为非0代价比较昂贵\n. 减少代码量：修改器、库合约等实现公共逻辑\n*/\n\n\n\n// Solidity 合约数据存储布局\n/*\nStorage 是一个巨大的Map，一共2^256个插槽 (slot)，每个插糟有 32字节，合约中的“状态变量”会根据其具体类型分别保存到这些插槽中。\ncontract StorageExample2 {\n    uint256 a = 11; // 插槽 0\n    uint8 b = 12; // 插槽1，1 字节\n    uint128 c = 13; // 插槽1，16 字节\n    bool d = true; // 插槽1，1 字节\n    uint128 e =  14;//插槽2\n}\n\n. 字段 a 需要 32 字节占用 1 个插槽，存于插槽 0 中。\n. b 只需要 1 字节，存于插槽 1 中。\n. 因为 插槽 1 还剩余 31 字节可用，而 c 只需要 16 字节，因此 c 也可以存储在插槽 1 中。\n. 此时，插槽 1 剩余 15 字节，可以继续存放 d 的一字节。\n. 插槽 1 还剩余 14 字节，但是 e 需要 16 字节存储，插槽 1 已不能容纳 e。需将 e 存放到下一个插槽 2 中。\n\n读取插槽1中的数据得到：\nsolt1 = \"0x0000000000000000000000000000010000000000000000000000000000000d0c\"\nsolt_len = len(solt1)\ndata = web3.eth.getStorageAt(contractAddr,1);\nb = parseInt(data.substr(solt_len-1*2,1*2),16);\nc = parseInt(data.substr(solt_len-1*2-16*2,16*2),16);\nd = parseInt(data.substr(solt_len-1*2-16*2-1*2,1*2),16);\n\n但这种机制也引发了另一个问题。因为以太坊虚拟机每次读取数据都是 32 字节，当你的数据小于 32 字节时需要更多的指令操作才能将所需值取出。 \n还需要截取 32 字节的中间一小部分。 在使得相比取 32 字节值的数据，需要花费更多的 gas 来获取小于 32 字节的数据。 当然这种开销，相对于更多的存储占用要便宜得多。\n\n\n*/\n\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			}
+		}
+	},
+	"output": {
+		"errors": [
+			{
+				"component": "general",
+				"errorCode": "1878",
+				"formattedMessage": "Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing \"SPDX-License-Identifier: <SPDX-License>\" to each source file. Use \"SPDX-License-Identifier: UNLICENSED\" for non-open-source code. Please see https://spdx.org for more information.\n--> GasOptimize.sol\n\n",
+				"message": "SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing \"SPDX-License-Identifier: <SPDX-License>\" to each source file. Use \"SPDX-License-Identifier: UNLICENSED\" for non-open-source code. Please see https://spdx.org for more information.",
+				"severity": "warning",
+				"sourceLocation": {
+					"end": -1,
+					"file": "GasOptimize.sol",
+					"start": -1
+				},
+				"type": "Warning"
+			},
+			{
+				"component": "general",
+				"errorCode": "3420",
+				"formattedMessage": "Warning: Source file does not specify required compiler version! Consider adding \"pragma solidity ^0.8.7;\"\n--> GasOptimize.sol\n\n",
+				"message": "Source file does not specify required compiler version! Consider adding \"pragma solidity ^0.8.7;\"",
+				"severity": "warning",
+				"sourceLocation": {
+					"end": -1,
+					"file": "GasOptimize.sol",
+					"start": -1
+				},
+				"type": "Warning"
+			}
+		],
+		"sources": {
+			"GasOptimize.sol": {
+				"ast": {
+					"absolutePath": "GasOptimize.sol",
+					"exportedSymbols": {},
+					"id": 1,
+					"nodeType": "SourceUnit",
+					"nodes": [],
+					"src": "2765:0:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

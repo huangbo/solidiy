@@ -2,24 +2,7 @@
 pragma solidity 0.8.7;
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
-
-// contract ValueTypes {
-//     string public myString = "hello world";
-//     bool public b = true;
-//     uint public u = 123; 
-//     int public i = -123;
-//     int public minInt = type(int).min;
-//     int public maxInt = type(int).max;
-//     address public addr = 0xC4CB0f670DFdC7c28F49F63feAacb2E10BAFdeC7;
-// }
-
-// contract FunctionIntro {
-//     function add(uint x, uint y) external pure returns (uint) {
-//         return x + y;
-//     }
-// }
-
-// external 外部函数，调用需要通过this
+// external 外部函数，本合约或者子合约调用需要通过this
 // contract externalTest {
 //     uint8 id;
 //     function setId(uint8 newId) public {
@@ -91,12 +74,14 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 // }
 
 /*
- 可以修饰变量和函数，函数的默认类型为public，变量的默认类型为internal（不能为external）。
- 内部调用不会产生EVM调用也称为消息调用，外部调用会产生EVM调用
- public 在合约外部和合约内部都可以调用
- external 外部调用，只能在合约外部调用（如果在合约内部包括继承子合约调用，调用需要通过this，不推荐这样），需要this访问，因为只能在合约外部访问，所以子合约也不能override
- internal 内部调用，当前合约和继承子合约可以调用
- private  只能当前合约中访问，继承子合约无法访问
+ 内部调用 不会产生EVM调用也称为消息调用，比如合约内部函数，父合约函数，库函数
+ 外部调用 会产生EVM调用，调用其他合约的函数，或者本合约的external函数
+
+ public     在合约外部和合约内部都可以调用
+ external   外部调用，只能在合约外部调用（如果在合约内部包括继承子合约调用，调用需要通过this，不推荐这样），需要this访问，因为只能在合约外部访问，所以子合约也不能override
+            可以强制将函数存储的位置设置为calldata，这会节约函数执行时所需存储或计算资源
+ internal   内部调用，当前合约和继承子合约可以调用
+ private    只能当前合约中访问，继承子合约无法访问
 */
 
 // contract FunctionTypes {
@@ -116,8 +101,8 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 // }
 
 /*
- pure 不能读也不能写链上的状态变量number，传入参数进行简单操作
- view 可以读到链上的状态变量，但是不能写
+ pure 不能读也不能写链上的状态变量
+ view 可以读到链上的状态变量，但是不能写(包括event)
  默认可以读写
 */
 
@@ -177,8 +162,9 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 // }
 
 /*
- constant 更节省gas，如果状态变量声明为 constant (常量)。在这种情况下，只能使用那些在编译时有确定值的表达式来给它们赋值。
- 使用immutable更节省gas，声明为不可变量(immutable)的变量的限制要比声明为常量(constant) 的变量的限制少：可以在合约的构造函数中或声明时为不可变的变量分配任意值。 不可变量在构造期间无法读取其值，并且只能赋值一次。
+constant   更节省gas，如果状态变量声明为 constant (常量)。在这种情况下，只能使用那些在编译时有确定值的表达式来给它们赋值。
+immutable  比constant更节省gas，声明为不可变量(immutable)的变量的限制要比声明为常量(constant) 的变量的限制少：
+            可以在合约的构造函数中或声明时为不可变的变量分配任意值。 不可变量在构造期间无法读取其值，并且只能赋值一次。
 */
 
 // contract Error {
@@ -202,8 +188,10 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 //     }
 // }
 
-// require revert assert 具有gas费的退还，状态的回滚
-// 自定义错误有节省gas的作用
+/*
+require revert assert 具有gas费的退还，状态的回滚
+自定义错误有节省gas的作用
+*/
 
 // contract FunctionModifier {
 //     bool public paused;
@@ -228,7 +216,10 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 //         count += _x;
 //     }
 // }
-// 函数修改器
+
+/*
+函数修改器
+*/
 
 // contract FunctionOutputs {
 //     function returnMany() public pure returns(uint x, bool b) {
@@ -887,3 +878,10 @@ ethereum.request({method: "personal_sign", params: [account, hash]})
 // }
 
 // 荷兰拍卖
+
+
+/*
+. 只能合约中所有的变量都可以直接获取到 any value in a smart contract storage can be accessed directly
+  包括private变量，可以直接获取到web3.eth.getStorageAt("0x1f5d666f191c4d757854266ee661c47b0012f894", 0)
+
+*/
