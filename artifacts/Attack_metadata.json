@@ -6,22 +6,39 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"stateMutability": "payable",
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_etherStoreAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
 			{
-				"anonymous": false,
-				"inputs": [
+				"stateMutability": "payable",
+				"type": "fallback"
+			},
+			{
+				"inputs": [],
+				"name": "attack",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "etherStore",
+				"outputs": [
 					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "gg",
-						"type": "uint256"
+						"internalType": "contract EtherStore",
+						"name": "",
+						"type": "address"
 					}
 				],
-				"name": "AttackLog",
-				"type": "event"
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
 				"inputs": [],
@@ -35,10 +52,6 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"stateMutability": "payable",
-				"type": "receive"
 			}
 		],
 		"devdoc": {
@@ -54,7 +67,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Attact.sol": "TxAttackWallet"
+			"Attact.sol": "Attack"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -69,11 +82,11 @@
 	},
 	"sources": {
 		"Attact.sol": {
-			"keccak256": "0xca3625ada1c2f4ae3013d7cfdc2406f694b9bbf8e602a1e001e9f718065d276b",
+			"keccak256": "0x5a9b93a00cf7b10c28188102c15a8440622c0d47b42c28a5346203edb719c8b9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7f3626f6e19481582bf8dcbfa38c08e53c61e432a317ccf5468a7596c3157135",
-				"dweb:/ipfs/QmVqnW2p7V4VKMs86289uNFzgypY8y8ERHJoBjb3AhZBKy"
+				"bzz-raw://0b2c2bd77f58e5ded878abd9598802acda6b6ee8933e79d8bd01a2cdc3be5bbc",
+				"dweb:/ipfs/QmZd3T1C3QK8Ms9gJRLsY2Z8EWwYLQ15dpqTy6M8UP5oUD"
 			]
 		}
 	},
