@@ -9,15 +9,25 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "owner",
+						"name": "_owner",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_funds",
+						"type": "uint256"
 					}
 				],
-				"name": "balanceOfBAYC",
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "bank_funds",
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "balance",
+						"name": "",
 						"type": "uint256"
 					}
 				],
@@ -25,26 +35,29 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "deployer",
+				"outputs": [
 					{
 						"internalType": "address",
-						"name": "from",
+						"name": "",
 						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
 					}
 				],
-				"name": "safeTransferFromBAYC",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -61,7 +74,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"HelloWord.sol": "interactBAYC"
+			"HelloWord.sol": "Bank"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -92,11 +105,11 @@
 			]
 		},
 		"HelloWord.sol": {
-			"keccak256": "0xe55133007d4f7ffeb84f43f2bd5c04c744fef3c4d63f050aedbb8a6a4be86aae",
+			"keccak256": "0x69474afd27d3564b170454edc23935ee2ca98fe19b269eb690cc794fc4e2fc71",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://115920c599ff23e0a2aa3eac271c6a54d6e3b4bcba9b0e2f45697319b0191c5a",
-				"dweb:/ipfs/QmPEMySTm9xiT6Pw6KXZitpBudwp17g4RgYUGwZwkn6jUq"
+				"bzz-raw://78c38c38df34e2250902925745c7b9411f1a88a57efa1f80164a12749e2d9c8b",
+				"dweb:/ipfs/QmXQmQ1tMcoVb9Rykz3VYjyK43iuBoVz2W6z9VZg37Wgqk"
 			]
 		}
 	},

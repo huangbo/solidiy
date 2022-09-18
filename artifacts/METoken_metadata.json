@@ -393,11 +393,11 @@
 			]
 		},
 		"METoken.sol": {
-			"keccak256": "0x21bad509ec4b27143d0c8e3c2171f136894ac90ceb60599cc4f840c64f5cafa7",
+			"keccak256": "0x8f0eceafb083c36489417131989cd37e611b272c3aa5a4f115339b42dcfc53a9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://03170982ec9e2cb8ef30cfd909cdef883565f23da791440e4ba00fba83f7cec4",
-				"dweb:/ipfs/QmYxCUCFuiKCY46cRdCyToVEszzBcNEUDPqoZ3DrHENP8V"
+				"bzz-raw://f69b4f06c57e0045715a62fcd185243b36d6c740d6e4fe7bb302cea962f8b263",
+				"dweb:/ipfs/QmSHA8jjKjxTuCSTu4uqwFgFZ5obsCownUcphR3G5iPGdH"
 			]
 		}
 	},
