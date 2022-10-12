@@ -6,26 +6,14 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"stateMutability": "payable",
-				"type": "constructor"
-			},
-			{
-				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "gg",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
 					}
 				],
-				"name": "UserLog",
-				"type": "event"
-			},
-			{
-				"inputs": [],
-				"name": "getBalance",
+				"name": "balanceOf",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -39,8 +27,13 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address payable",
-						"name": "dest",
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
 						"type": "address"
 					},
 					{
@@ -49,9 +42,15 @@
 						"type": "uint256"
 					}
 				],
-				"name": "transferTo",
-				"outputs": [],
-				"stateMutability": "payable",
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -68,7 +67,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Copy_Attact.sol": "TxUserWallet"
+			"xen.sol": "IXEN2"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -82,12 +81,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"Copy_Attact.sol": {
-			"keccak256": "0x844bc57483c9be316ebb7a49b2e69b6a406270980727de158dd7ffbbc97068a2",
+		"xen.sol": {
+			"keccak256": "0xdf3a7b753c5b62ad22becb5d37801f9160290b53847e820ed0bef4b105adfea2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5da662c2c97714ffec3d02b08c8b87956b28e5f40778f3b416be8474d236b286",
-				"dweb:/ipfs/QmZqY3Zx8XWTnv67YuyMwboqGAQ2g8bbGVYeuYuM1yv1EC"
+				"bzz-raw://4b6f73f5ac814b3d3b6cfc1408292c37de7a791f4b7511a0153347785a97d6e7",
+				"dweb:/ipfs/QmWkA2fE9mGFSQJPe8FH17JSuPmTnMcqBuYT6Fcaoq7TTX"
 			]
 		}
 	},

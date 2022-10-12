@@ -1,0 +1,71 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "claimMintReward",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "term",
+						"type": "uint256"
+					}
+				],
+				"name": "claimRank",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"xen.sol": "GET"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"xen.sol": {
+			"keccak256": "0xdf3a7b753c5b62ad22becb5d37801f9160290b53847e820ed0bef4b105adfea2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4b6f73f5ac814b3d3b6cfc1408292c37de7a791f4b7511a0153347785a97d6e7",
+				"dweb:/ipfs/QmWkA2fE9mGFSQJPe8FH17JSuPmTnMcqBuYT6Fcaoq7TTX"
+			]
+		}
+	},
+	"version": 1
+}

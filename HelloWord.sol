@@ -605,20 +605,20 @@ This is also applied to function parameters and return variables.
 // 接口合约
 // 所有函数都必须是external且不能有函数体, 继承接口的合约必须实现接口定义的所有功能
 
-contract interactBAYC {
-    // 利用BAYC地址创建接口合约变量（ETH主网）
-    IERC721 BAYC = IERC721(0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D);
+// contract interactBAYC {
+//     // 利用BAYC地址创建接口合约变量（ETH主网）
+//     IERC721 BAYC = IERC721(0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D);
 
-    // 通过接口调用BAYC的balanceOf()查询持仓量
-    function balanceOfBAYC(address owner) external view returns (uint256 balance){
-        return BAYC.balanceOf(owner);
-    }
+//     // 通过接口调用BAYC的balanceOf()查询持仓量
+//     function balanceOfBAYC(address owner) external view returns (uint256 balance){
+//         return BAYC.balanceOf(owner);
+//     }
 
-    // 通过接口调用BAYC的safeTransferFrom()安全转账
-    function safeTransferFromBAYC(address from, address to, uint256 tokenId) external{
-        BAYC.safeTransferFrom(from, to, tokenId);
-    }
-}
+//     // 通过接口调用BAYC的safeTransferFrom()安全转账
+//     function safeTransferFromBAYC(address from, address to, uint256 tokenId) external{
+//         BAYC.safeTransferFrom(from, to, tokenId);
+//     }
+// }
 
 /*
  无聊猿BAYC属于ERC721代币，实现了IERC721接口的功能。我们不需要知道它的源代码，只需知道它的合约地址，用IERC721接口就可以与它交互，
