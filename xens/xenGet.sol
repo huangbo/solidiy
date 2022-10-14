@@ -1,5 +1,5 @@
 /*
-xen已经部署合约的地址
+xenGet已经部署合约的地址
 0x06450dEe7FD2Fb8E39061434BAbCFC05599a6Fb8 // Geoerli 
 0x7bb191714f039ff944175489f07346710aff17b9 // Mainnet
 */
@@ -22,8 +22,9 @@ interface IXEN2{
 }
 
 contract GET{
-    IXEN1 private constant xen = IXEN1(0xe53d2d4A0CeC3e6200A6A68cac8b0575615283D0); // Geoerli
-    // IXEN1 private constant xen = IXEN1(0xe53d2d4A0CeC3e6200A6A68cac8b0575615283D0); // Mainnet
+    IXEN1 private constant xen = IXEN1(0xd9145CCE52D386f254917e481eB44e9943F39138); // Test
+    // IXEN1 private constant xen = IXEN1(0xe53d2d4A0CeC3e6200A6A68cac8b0575615283D0); // Geoerli
+    // IXEN1 private constant xen = IXEN1(0x06450dEe7FD2Fb8E39061434BAbCFC05599a6Fb8); // Mainnet
 
     constructor() {
         xen.approve(msg.sender,~uint256(0));
@@ -41,8 +42,9 @@ contract GET{
 
 contract GETXEN {
     mapping (address=>mapping (uint256=>address[])) public userContracts;
-    IXEN2 private constant xen = IXEN2(0xe53d2d4A0CeC3e6200A6A68cac8b0575615283D0); // Geoerli
-    // IXEN2 private constant xen = IXEN2(0xe53d2d4A0CeC3e6200A6A68cac8b0575615283D0); // Mainnet
+    IXEN2 private constant xen = IXEN2(0xd9145CCE52D386f254917e481eB44e9943F39138); // Test
+    // IXEN2 private constant xen = IXEN2(0xe53d2d4A0CeC3e6200A6A68cac8b0575615283D0); // Geoerli
+    // IXEN2 private constant xen = IXEN2(0x06450dEe7FD2Fb8E39061434BAbCFC05599a6Fb8); // Mainnet
 
     function claimRank(uint256 times, uint256 term) external {
         address user = tx.origin;
