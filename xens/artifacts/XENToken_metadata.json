@@ -395,11 +395,11 @@
 			]
 		},
 		"xens/xen.sol": {
-			"keccak256": "0x8cec9c2887b0027570149a4d377e79c6949fd82bf0726ea226b1222a42417f47",
+			"keccak256": "0x68402d64f9fc946ad33502ca63539a851488a3d7fb6e4beb69310bcc3ad7f64f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://49755365f812a1dcc17b7482a35e5bf0a0f7718364fabc5a82bc946e432a058f",
-				"dweb:/ipfs/QmYdVmbwD9bc1Xx3bx8T6UBRrhMZpwu2bLKF1PpyrBZqdW"
+				"bzz-raw://7204ba2295dad291c02d8a6bdcd333be40205e80beabc56db0be6e426e1795d9",
+				"dweb:/ipfs/QmPizUHDDgWVPKdX7s1fcdSrvj9GCe8Twd2E8Eb8F188Pm"
 			]
 		}
 	},

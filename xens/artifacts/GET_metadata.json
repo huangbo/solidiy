@@ -54,11 +54,11 @@
 	},
 	"sources": {
 		"xens/xenMinimalProxyGet.sol": {
-			"keccak256": "0x2ec96618541fd5f098df256075a4088dcbd4720cc53a9420093b9bb46d845e78",
+			"keccak256": "0xf7ba399e376a829df643fc07978188641de0e69c92f9a0cb1945a58e2eade64e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://43a85f614f68095beba1e66b73b6d00fda1e2d07e817dc7c6047ad1315179260",
-				"dweb:/ipfs/QmZvJZ7HinjKnCEbEp8iP7z2dCPb93mfFyjWksfJgtiCrd"
+				"bzz-raw://40159b2f28f505fcfefef8104ed46980b87f042a904ecb3d2252b7a1f0defbd9",
+				"dweb:/ipfs/QmREo8j4ZCq749LcJ4wL58CRnukT1BJL7PdFAWTFxr322P"
 			]
 		}
 	},

